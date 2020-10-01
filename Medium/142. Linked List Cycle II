@@ -1,0 +1,67 @@
+142. Linked List Cycle II
+Medium
+
+Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+Notice that you should not modify the linked list. Also, pos is not given as argument
+
+Example 1:
+Input: head = [3,2,0,-4], pos = 1
+Output: tail connects to node index 1
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+
+SOLUTION HINT: Similar to LinkedList Cycle 141 -> 
+//Check if cycle exists -> If exist find start point by intersection of head and slow//
+Additional loop from head if cycle is found until slow and head intersect
+
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if(head==null){
+            return null;
+        }
+        
+        boolean isCyclic = false;
+        ListNode slow = head;
+        ListNode fast = head;
+       
+        /*BASIC CONDITION TO CHECK IF CYCLE EXISTS*/
+        while(fast!=null && fast.next!=null){          
+            fast = fast.next.next;                                     
+            slow = slow.next;  
+            if(fast==slow){
+                isCyclic=true;
+                break;
+            }
+        }
+        
+        /*If No cycle exists, return NULL*/
+        if(isCyclic==false){
+            return null;
+        }    
+        
+        /*Now verified cycle exists -> so find intersecting point and return it.*/
+        /*For eg: [1,..,11] --> fast & slow will intersect at 11 so now we will start from head to find starting point of intersection/cycle i.e 7 ->by slow travelelling within cycle*/
+        while(head!=slow){
+            head = head.next;
+            slow = slow.next;
+        }       
+        
+        return head;
+        
+//         ListNode curr = head;
+//         Set<ListNode> hset = new HashSet<ListNode>();
+        
+//         while(curr!=null){
+//             System.out.println(curr.val);
+//             if(hset.contains(curr)){
+//                 return curr;
+//             }
+            
+//             hset.add(curr);
+//             curr = curr.next;
+//         }
+        
+//         return null;
+    }
+}
+
