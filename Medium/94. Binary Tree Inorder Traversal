@@ -1,0 +1,33 @@
+94. Binary Tree Inorder Traversal 
+
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+Example 1:
+Input: root = [1,null,2,3]
+Output: [1,3,2]
+
+SOLUTION: **DO AGAIN**
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        List<Integer> visit = new ArrayList<>();    
+        TreeNode current = root;
+            // stack.push(root);
+            while(current!=null || ! stack.isEmpty()) {
+                while(current!= null) {             
+                    stack.push(current);
+                    current = current.left; 
+                }
+                current = stack.pop();
+                // System.out.println("current: " + current.val);
+                visit.add(current.val);
+                // if(current.right != null) {
+                    current = current.right;                
+                    // stack.push(current);
+                // }
+            }
+        
+        return visit;
+    }
+}
