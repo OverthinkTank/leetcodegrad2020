@@ -1,0 +1,42 @@
+145. Binary Tree Postorder Traversal
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
+Example 1:
+Input: root = [1,null,2,3]
+Output: [3,2,1]
+
+
+SOLUTION: **LEARN AGAIN**
+
+public List<Integer> postorderTraversal(TreeNode root) {
+       
+        Stack<TreeNode> stk = new Stack<TreeNode>();
+        Stack<Integer> stk2 = new Stack<Integer>();
+        
+        List<Integer> result = new ArrayList<>();
+        if(root==null){
+            return result;
+        }
+
+        stk.push(root);
+        while(!stk.isEmpty()){    
+            TreeNode current  = stk.pop(); 
+
+            stk2.push(current.val);
+            
+            if(current.left!=null){
+                stk.push(current.left);
+            }
+            
+            if(current.right!=null){
+                stk.push(current.right);
+            }
+        }
+        
+        while(!stk2.isEmpty()){
+            result.add(stk2.pop());
+        }
+
+        return result;
+ 
+    }
+}
