@@ -7,36 +7,37 @@ Output: [3,2,1]
 
 SOLUTION: **LEARN AGAIN**
 
-public List<Integer> postorderTraversal(TreeNode root) {
-       
-        Stack<TreeNode> stk = new Stack<TreeNode>();
-        Stack<Integer> stk2 = new Stack<Integer>();
-        
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+    
+        /*Using 2 stacks --> Here we use POPPED element to traverse*/
+        Stack<TreeNode> stk1 = new Stack<>();
+        Stack<Integer> stk2 = new Stack<>();
         List<Integer> result = new ArrayList<>();
+        
         if(root==null){
             return result;
         }
-
-        stk.push(root);
-        while(!stk.isEmpty()){    
-            TreeNode current  = stk.pop(); 
-
-            stk2.push(current.val);
+        
+        stk1.push(root);
+        while(!stk1.isEmpty()){
+            //IMP. PART
+            TreeNode temp = stk1.pop();
+            stk2.push(temp.val);
             
-            if(current.left!=null){
-                stk.push(current.left);
+            if(temp.left!=null){
+                stk1.push(temp.left);
             }
             
-            if(current.right!=null){
-                stk.push(current.right);
+             if(temp.right!=null){
+                stk1.push(temp.right);
             }
         }
-        
+       
+        /*Reversing stack2 Elements to be added in list*/
         while(!stk2.isEmpty()){
             result.add(stk2.pop());
         }
-
         return result;
- 
     }
 }
