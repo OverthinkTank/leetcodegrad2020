@@ -19,7 +19,7 @@ Return:
 ]
 
 
-SOLUTION : Using Recursion HINT: helper function with (sum-root.val) recursive calls on left and right --> Iteration using STACK.
+SOLUTION : Using Recursion HINT: helper function with (sum-root.val) recursive calls on left and right OR Iterative solution using STACK.
 
 class Solution {
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
